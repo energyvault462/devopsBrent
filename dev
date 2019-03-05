@@ -3,6 +3,8 @@
 docker run -it \
   -v /datapool/nas/code/bu/cp/go:/gopath \
   -v /datapool/nas/code/bu/cp:/home/brent/code \
+  -v $HOME/.gitconfig:/home/brent/.gitconfig \
+  -v $HOME/.ssh:/home/brent/.ssh \
   -p 4242:22 \
   -p 4243:8000 \
   dev
