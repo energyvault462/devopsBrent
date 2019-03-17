@@ -1,6 +1,7 @@
 #!/bin/bash
 
 docker run --rm --name=dev -it \
+  --hostname=dev \
   -v /datapool/nas/code/bu/cp/go:/gopath \
   -v /datapool/nas/code/bu/cp:/home/brent/code \
   -v $HOME/.gitconfig:/home/brent/.gitconfig \
