@@ -10,7 +10,7 @@ ENV GOROOT /goroot
 ENV GOPATH /gopath
 ENV PATH $PATH:$GOROOT/bin:$GOPATH/bin
 
-ARG CURRENT_USER
+ARG CURRENT_NAME
 ARG CURRENT_UID
 ARG CURRENT_GID
 
@@ -33,6 +33,8 @@ WORKDIR /tmp
 RUN pip install --upgrade pip
 
 # Install RVM
+RUN mkdir ~/.gnupg
+RUN echo "disable-ipv6" >> ~/.gnupg/dirmngr.conf
 ENV RVM_VERSION 1.29.3
 RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3 && \
     wget "https://github.com/rvm/rvm/archive/$RVM_VERSION.tar.gz" && \
@@ -58,7 +60,7 @@ RUN npm install -g bower ember-cli grunt-cli less
 RUN apt-get -y install ctags sudo zsh
 
 # Create custom user
-RUN useradd -u $CURRENT_UID -g $CURRENT_GID -m -s /bin/bash $CURRENT_NAME && \
+RUN useradd -u $CURRENT_UID -m -s /bin/bash $CURRENT_NAME && \
 	 echo "$CURRENT_NAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 # Install custom shell
