@@ -1,5 +1,10 @@
 #!/bin/bash
 
+CURRENT_NAME=$(whoami)
+CURRENT_UID=$(id -u)
+CURRENT_GID=$(id -g)
+
+
 docker run --rm --name=dev -it \
   --hostname=dev \
   -v /datapool/nas/code/bu/cp/go:/gopath \

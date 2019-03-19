@@ -4,12 +4,15 @@ MAINTAINER brentj433@gmail.com
 
 
 RUN apt-get update && apt-get -y dist-upgrade && apt-get -y clean && apt-get -y autoremove
-RUN apt-get -y install nfs-common ssh build-essential python-dev libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev git curl nano
+RUN apt-get update && apt-get -y install nfs-common ssh build-essential python-dev libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev git curl nano
 
 ENV GOROOT /goroot
 ENV GOPATH /gopath
 ENV PATH $PATH:$GOROOT/bin:$GOPATH/bin
 
+ARG CURRENT_USER
+ARG CURRENT_UID
+ARG CURRENT_GID
 
 ARG GOVERSION
 RUN mkdir /goroot && curl -O https://storage.googleapis.com/golang/go$GOVERSION.linux-amd64.tar.gz \
@@ -55,18 +58,18 @@ RUN npm install -g bower ember-cli grunt-cli less
 RUN apt-get -y install ctags sudo zsh
 
 # Create custom user
-RUN useradd -u 1001 -ms /bin/bash brent && \
-	 echo "brent ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+RUN useradd -u $CURRENT_UID -g $CURRENT_GID -m -s /bin/bash $CURRENT_NAME && \
+	 echo "$CURRENT_NAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 # Install custom shell
 RUN git clone https://github.com/myzsh/myzsh $HOME/.myzsh && \
     git clone https://github.com/myzsh/myzsh-golang $HOME/.myzsh/remotes/golang && \
     git clone https://github.com/myzsh/myzsh-timer $HOME/.myzsh/remotes/timer
 
-USER brent
-ENV USER brent
+USER $CURRENT_NAME
+ENV USER $CURRENT_NAME
 ENV PATH $HOME:$PATH
 ENV DOCKER true
-WORKDIR  /home/brent
+WORKDIR  /home/CURRENT_NAME
 
 CMD ["/bin/bash"]
