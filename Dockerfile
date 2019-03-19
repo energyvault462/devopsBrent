@@ -4,7 +4,7 @@ MAINTAINER brentj433@gmail.com
 
 
 RUN apt-get update && apt-get -y dist-upgrade && apt-get -y clean && apt-get -y autoremove
-RUN apt-get -y install open-vm-tools nfs-common ssh build-essential python-dev libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev git curl nano
+RUN apt-get -y install nfs-common ssh build-essential python-dev libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev git curl nano
 
 ENV GOROOT /goroot
 ENV GOPATH /gopath
