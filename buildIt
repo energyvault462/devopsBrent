@@ -3,4 +3,4 @@ CURRENT_NAME=$(whoami)
 CURRENT_UID=$(id -u)
 CURRENT_GID=$(id -g)
 echo "current name: $CURRENT_NAME"
-docker build --build-arg CURRENT_GID=$CURRENT_GID --build-arg CURRENT_NAME=$CURRENT_NAME --build-arg CURRENT_UID=$CURRENT_UID  --build-arg GOVERSION=1.12 --build-arg FORCE_NEW_BUILD="$(date)" -t energyvault462/dev .
+docker build --build-arg CURRENT_NAME=$CURRENT_NAME --build-arg CURRENT_UID=$CURRENT_UID  --build-arg GOVERSION=1.12 --build-arg FORCE_NEW_BUILD="$(date)" -t energyvault462/dev .

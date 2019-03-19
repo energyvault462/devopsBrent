@@ -12,7 +12,6 @@ ENV PATH $PATH:$GOROOT/bin:$GOPATH/bin
 
 ARG CURRENT_NAME
 ARG CURRENT_UID
-ARG CURRENT_GID
 
 ARG GOVERSION
 RUN mkdir /goroot && curl -O https://storage.googleapis.com/golang/go$GOVERSION.linux-amd64.tar.gz \
@@ -72,6 +71,6 @@ USER $CURRENT_NAME
 ENV USER $CURRENT_NAME
 ENV PATH $HOME:$PATH
 ENV DOCKER true
-WORKDIR  /home/CURRENT_NAME
+WORKDIR  /home/$CURRENT_NAME
 
 CMD ["/bin/bash"]
