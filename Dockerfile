@@ -67,10 +67,17 @@ RUN git clone https://github.com/myzsh/myzsh $HOME/.myzsh && \
     git clone https://github.com/myzsh/myzsh-golang $HOME/.myzsh/remotes/golang && \
     git clone https://github.com/myzsh/myzsh-timer $HOME/.myzsh/remotes/timer
 
+WORKDIR /tmp
+# file with all the needed Env. Variables in it.
+COPY environment /tmp/
+RUN cat /tmp/environment >> /etc/environment && rm -f /tmp/environment
+
 USER $CURRENT_NAME
 ENV USER $CURRENT_NAME
 ENV PATH $HOME:$PATH
 ENV DOCKER true
 WORKDIR  /home/$CURRENT_NAME
+COPY .bashrc /home/$CURRENT_NAME
+RUN /bin/bash -c "source /etc/environment"
 
 CMD ["/bin/bash"]

@@ -13,4 +13,5 @@ docker run --rm --name=dev -it \
   -v $HOME/.ssh:/home/brent/.ssh \
   -p 4242:22 \
   -p 4243:8000 \
+  -p 2323:8080 \
   energyvault462/dev
