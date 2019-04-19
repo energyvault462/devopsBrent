@@ -11,6 +11,11 @@ docker run --rm --name=dev -it \
   -v /datapool/nas/code/bu/cp:/home/brent/code \
   -v $HOME/.gitconfig:/home/brent/.gitconfig \
   -v $HOME/.ssh:/home/brent/.ssh \
+  -e POSTGRES_USER=${POSTGRES_USER} \
+  -e POSTGRES_PASSWORD=${POSTGRES_PASSWORD} \
+  -e POSTGRES_SERVER=${POSTGRES_SERVER} \
+  -e POSTGRES_DB=${POSTGRES_DB} \
+  -e PLEX_WATCHLIST_BASE_FOLDER=${PLEX_WATCHLIST_BASE_FOLDER} \
   -p 4242:22 \
   -p 4243:8000 \
   -p 2323:8080 \
